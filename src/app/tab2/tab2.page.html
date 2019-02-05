@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <span style="font-weight:normal">Callejero3x4</span>
+    </ion-title>
+  </ion-toolbar>
+
+  
+
+</ion-header>
+
+<ion-content>
+
+<ion-slides>
+    
+<ion-slide>
+  <ion-content class="fixed-scroll">
+    <ion-refresher (ionRefresh)="doRefreshCom($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
+        refreshingText="Cargando...">
+      </ion-refresher-content>
+
+    </ion-refresher>
+    <ion-list #dynamicList id="dynamicList">
+      <ion-item *ngFor="let item of listaComPanel; let i=index">
+          <ion-label>
+              <h2>{{item.nombre}}</h2>
+              <p>{{item.director}}</p>
+            </ion-label>
+
+      </ion-item>
+
+    </ion-list>
+
+  </ion-content>
+
+</ion-slide>
+<ion-slide>
+    <ion-content class="fixed-scroll">
+      <ion-refresher (ionRefresh)="doRefreshChi($event)">
+          <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
+          refreshingText="Cargando...">
+        </ion-refresher-content>
+  
+      </ion-refresher>
+      <ion-list #dynamicList id="dynamicList">
+        <ion-item *ngFor="let item of listaChiPanel; let i=index">
+            <ion-label>
+                <h2>{{item.nombre}}</h2>
+                <p>{{item.director}}</p>
+              </ion-label>
+  
+        </ion-item>
+  
+      </ion-list>
+  
+    </ion-content>
+  
+  </ion-slide>
+  <ion-slide>
+      <ion-content class="fixed-scroll">
+        <ion-refresher (ionRefresh)="doRefreshCoro($event)">
+            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
+            refreshingText="Cargando...">
+          </ion-refresher-content>
+    
+        </ion-refresher>
+        <ion-list #dynamicList id="dynamicList">
+          <ion-item *ngFor="let item of listaCoroPanel; let i=index">
+              <ion-label>
+                  <h2>{{item.nombre}}</h2>
+                  <p>{{item.director}}</p>
+                </ion-label>
+    
+          </ion-item>
+    
+        </ion-list>
+    
+      </ion-content>
+    
+    </ion-slide>
+    <ion-slide>
+        <ion-content class="fixed-scroll">
+          <ion-refresher (ionRefresh)="doRefreshCuar($event)">
+              <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
+              refreshingText="Cargando...">
+            </ion-refresher-content>
+      
+          </ion-refresher>
+          <ion-list #dynamicList id="dynamicList">
+            <ion-item *ngFor="let item of listaCuarPanel; let i=index">
+                <ion-label>
+                    <h2>{{item.nombre}}</h2>
+                    <p>{{item.director}}</p>
+                  </ion-label>
+      
+            </ion-item>
+      
+          </ion-list>
+      
+        </ion-content>
+      
+      </ion-slide>
+  
+</ion-slides>
+
+</ion-content>
+

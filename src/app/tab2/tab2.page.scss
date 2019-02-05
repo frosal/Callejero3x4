@@ -1,0 +1,28 @@
+.SwipedTabs-indicatorSegment{
+    -webkit-transition: 0s all;
+    -moz-transition:  0s all;
+    -o-transition:  0s all;
+    transition:  0s all;
+    transform-origin: top 0 left 0;
+    height: 2px;
+    position: relative;
+    top: -2px;
+    background-color: var(--ion-color-tertiary) !important;
+}
+
+ion-slide.swiper-slide {
+    display:block;
+}
+
+.fixed-scroll{
+    height:100%!important;
+    overflow-y:scroll;
+    position:relative;
+    ::-webkit-scrollbar {
+        display: none !important;
+    }
+}
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
