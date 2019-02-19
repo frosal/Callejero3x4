@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, IonInfiniteScroll, NavController, ModalController, AlertController, LoadingController } from '@ionic/angular';
+import { IonSlides, IonInfiniteScroll, NavController, ModalController, AlertController, LoadingController, ActionSheetController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import {ModalComponent }from '../modal/modal.component';
+
+import{ModalPage} from '../modal/modal.page';
 import { CloudService } from 'src/app/services/cloud.service';
+import { discardPeriodicTasks } from '@angular/core/testing';
 
 @Component({
   selector: 'app-tab2',
@@ -12,36 +14,84 @@ import { CloudService } from 'src/app/services/cloud.service';
 export class Tab2Page{
   @ViewChild('dynamicList') dynamicList;
   @ViewChild('SwipedTabsSlider') SwipedTabsSlider: IonSlides;
-  @ViewChild('infiniteScroll') ionInfiniteScroll: IonInfiniteScroll;
+ 
 
-  listaAgrup=[];
-  listaAgrupPanel=[];
-  listaComp=[];
-  listaCompPanel=[];
-  listaChi=[];
-  listaChiPanel=[];
-  listaCoro=[];
-  listaCoroPanel=[];
-  listaCuar=[];
-  listaCuarPanel=[];
-
-  public category: any = "0";
-  SwipedTabsIndicator: any = null;
-  tabs = ["selectTab(0)", "selectTab(1)"];
-  ntabs = 2;
+  
+  
+ // Slides
+ SwipedTabsIndicator: any = null;
+ tabs = ['selectTab(0)', 'selectTab(1)'];
+ public category: any = '0';
+ ntabs = 2;
+ listaAgrupCom=[];
+  listaAgrupComPanel=[];
+  listaAgrupChi=[];
+  listaAgrupChiPanel=[];
+  listaAgrupCoro=[];
+  listaAgrupCoroPanel=[];
+  listaAgrupCuar=[];
+  listaAgrupCuarPanel=[];
+ style: any;
+  
 
   constructor(private cloud: CloudService,
     public loadingController: LoadingController,
     private router: Router,
-    public alertCtrl: AlertController,
-    public modalCont: ModalController,
-    public navCont: NavController){
+ 
+   public modalCont: ModalController,
+  
+    public actionSheetController: ActionSheetController){
 
     }
 
     ionViewDidEnter(){
+      this.presentLoading('Cargando...');
+      this.cloud.leerAgrupsComparsa()
+      .then((misdatos)=>{
+        this.listaAgrupCom=[];
+        this.delete();
+
+        misdatos.forEach((doc) => {
+          this.listaAgrupCom.push({ id: doc.id, ...doc.data() });
+        });
+        this.listaAgrupComPanel = this.listaAgrupCom;
+        this.loadingController.dismiss();
+
+      });
       
-      
+      this.cloud.leerAgrupsChirigota()
+      .then((miChiri)=>{
+        this.listaAgrupChi=[];
+        this.delete();
+        miChiri.forEach((doc)=>{
+          this.listaAgrupChi.push({id: doc.id, ...doc.data()});
+        });
+        this.listaAgrupChiPanel=this.listaAgrupChi;
+        this.loadingController.dismiss();
+
+      });
+      this.cloud.leerAgrupsCoro()
+      .then((miCoro)=>{
+        this.listaAgrupCoro=[];
+        this.delete();
+        miCoro.forEach((doc)=>{
+          this.listaAgrupCoro.push({id: doc.id, ...doc.data()});
+        });
+        this.listaAgrupCoroPanel=this.listaAgrupCoro;
+        this.loadingController.dismiss();
+
+      });
+      this.cloud.leerAgrupsCuarteta()
+      .then((miCuar)=>{
+        this.listaAgrupCuar=[];
+        this.delete();
+        miCuar.forEach((doc)=>{
+          this.listaAgrupCuar.push({id: doc.id, ...doc.data()});
+        });
+        this.listaAgrupCuarPanel=this.listaAgrupCuar;
+        this.loadingController.dismiss();
+
+      });
 
     }
 
@@ -66,80 +116,37 @@ export class Tab2Page{
       return await myloading.present();
     }
 
-    doRefreshCom(refresher) {
-      this.cloud.leerAgrupsComparsa()
-        .then(querySnapshot => {
-          this.listaComp = [];
-          this.delete(); /* Es un hack para solucionar un bug con el refresher y las listas
-  dinámicas (ngFor) */
-          querySnapshot.forEach((doc) => {
-            this.listaComp.push({ id: doc.id, ...doc.data() });
-          });
-          this.listaCompPanel = this.listaComp;
-          refresher.target.complete();
-        });
-        
-    }
-    doRefreshCuar(refresher) {
-      this.cloud.leerAgrupsCuarteta()
-        .then(querySnapshot => {
-          this.listaCuar = [];
-          this.delete(); /* Es un hack para solucionar un bug con el refresher y las listas
-  dinámicas (ngFor) */
-          querySnapshot.forEach((doc) => {
-            this.listaCuar.push({ id: doc.id, ...doc.data() });
-          });
-          this.listaCuarPanel = this.listaCuar;
-          refresher.target.complete();
-        });
-    }
-    doRefreshChi(refresher) {
-      this.cloud.leerAgrupsChirigota()
-        .then(querySnapshot => {
-          this.listaChi = [];
-          this.delete(); /* Es un hack para solucionar un bug con el refresher y las listas
-  dinámicas (ngFor) */
-          querySnapshot.forEach((doc) => {
-            this.listaChi.push({ id: doc.id, ...doc.data() });
-          });
-          this.listaChiPanel = this.listaChi;
-          refresher.target.complete();
-        });
-    }
-    doRefreshCoro(refresher) {
-      this.cloud.leerAgrupsCoro()
-        .then(querySnapshot => {
-          this.listaCoro = [];
-          this.delete(); /* Es un hack para solucionar un bug con el refresher y las listas
-  dinámicas (ngFor) */
-          querySnapshot.forEach((doc) => {
-            this.listaCoro.push({ id: doc.id, ...doc.data() });
-          });
-          this.listaCoroPanel = this.listaCoro;
-          refresher.target.complete();
-        });
-    }
+    
+   
+    
 
-    async mostrarAgrup(key,nombre,director,origen,horario){
+    async mostrarAgrup(key,nombre, director, origen, tipo, horario){
       const modal=await this.modalCont.create({
-component: ModalComponent,
+component: ModalPage,
 componentProps:{
   key:key,
-  nombre:nombre,
-  director:director,
-  origen:origen,
-  horario: horario
+  nombre: nombre,
+  director: director,
+origen: origen,
+tipo: tipo,
+horario:horario
+
 }
       });
-      modal.onDidDismiss()
-      .then(response =>{
-        this.ionViewDidEnter()
-      })
-      .catch(error=>{
-        console.log(error)
-      });
+      
+      
+      
 
       return await modal.present();
+    }
+    
+
+    updateCat(cat: Promise<any>){
+      cat.then(dat =>{
+        this.category=dat;
+        this.category= +this.category;
+
+      })
     }
 
   

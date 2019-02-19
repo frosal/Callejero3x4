@@ -1,108 +1,86 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <span style="font-weight:normal">Callejero3x4</span>
-    </ion-title>
-  </ion-toolbar>
 
+<ion-content class="fixed-scroll">
   
-
-</ion-header>
-
-<ion-content>
-
-<ion-slides>
-    
-<ion-slide>
-  <ion-content class="fixed-scroll">
-    <ion-refresher (ionRefresh)="doRefreshCom($event)">
-        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
-        refreshingText="Cargando...">
-      </ion-refresher-content>
-
-    </ion-refresher>
-    <ion-list #dynamicList id="dynamicList">
-      <ion-item *ngFor="let item of listaComPanel; let i=index">
-          <ion-label>
-              <h2>{{item.nombre}}</h2>
-              <p>{{item.director}}</p>
-            </ion-label>
-
-      </ion-item>
-
-    </ion-list>
-
-  </ion-content>
-
-</ion-slide>
-<ion-slide>
-    <ion-content class="fixed-scroll">
-      <ion-refresher (ionRefresh)="doRefreshChi($event)">
-          <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
-          refreshingText="Cargando...">
-        </ion-refresher-content>
-  
-      </ion-refresher>
-      <ion-list #dynamicList id="dynamicList">
-        <ion-item *ngFor="let item of listaChiPanel; let i=index">
-            <ion-label>
-                <h2>{{item.nombre}}</h2>
-                <p>{{item.director}}</p>
-              </ion-label>
-  
-        </ion-item>
-  
-      </ion-list>
-  
-    </ion-content>
-  
-  </ion-slide>
-  <ion-slide>
-      <ion-content class="fixed-scroll">
-        <ion-refresher (ionRefresh)="doRefreshCoro($event)">
-            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
-            refreshingText="Cargando...">
-          </ion-refresher-content>
-    
-        </ion-refresher>
-        <ion-list #dynamicList id="dynamicList">
-          <ion-item *ngFor="let item of listaCoroPanel; let i=index">
-              <ion-label>
-                  <h2>{{item.nombre}}</h2>
-                  <p>{{item.director}}</p>
-                </ion-label>
-    
-          </ion-item>
-    
-        </ion-list>
-    
-      </ion-content>
-    
-    </ion-slide>
+  <ion-slides #SwipedTabsSlider (ionSlideTransitionStart)="updateCat(SwipedTabsSlider.getActiveIndex())">
     <ion-slide>
-        <ion-content class="fixed-scroll">
-          <ion-refresher (ionRefresh)="doRefreshCuar($event)">
-              <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
-              refreshingText="Cargando...">
-            </ion-refresher-content>
-      
-          </ion-refresher>
-          <ion-list #dynamicList id="dynamicList">
-            <ion-item *ngFor="let item of listaCuarPanel; let i=index">
-                <ion-label>
-                    <h2>{{item.nombre}}</h2>
-                    <p>{{item.director}}</p>
+        <ion-header>
+            <ion-toolbar color="primary">
+              <ion-title>
+                <span style="font-weight:normal">Comparsa</span>
+              </ion-title>
+            </ion-toolbar>
+          </ion-header>
+      <ion-list #dynamicList id="dynamicList">
+        <ion-item *ngFor="let item of listaAgrupComPanel;let i = index"> 
+            <ion-label (click)="mostrarAgrup(item.key,item.nombre,item.director,item.origen,item.tipo,item.horario)">
+                <h3>{{item.nombre}}</h3>
+                <h4>Director: {{item.director}}</h4>
+              </ion-label>
+        </ion-item>
+
+      </ion-list>
+    </ion-slide>
+
+    <ion-slide>
+        <ion-header>
+            <ion-toolbar color="secondary">
+              <ion-title>
+                <span style="font-weight:normal">Chirigota</span>
+              </ion-title>
+            </ion-toolbar>
+          </ion-header>
+        <ion-list #dynamicList id="dynamicList">
+            <ion-item *ngFor="let item of listaAgrupChiPanel;let i = index"> 
+                <ion-label (click)="mostrarAgrup(item.key,item.nombre,item.director,item.origen,item.tipo,item.horario)">
+                    <h3>{{item.nombre}}</h3>
+                    <h4>Director: {{item.director}}</h4>
                   </ion-label>
-      
+              
             </ion-item>
-      
+    
           </ion-list>
-      
-        </ion-content>
-      
-      </ion-slide>
-  
-</ion-slides>
+    </ion-slide>
+
+    <ion-slide>
+        <ion-header>
+            <ion-toolbar color="tertiary">
+              <ion-title>
+                <span style="font-weight:normal">Coro</span>
+              </ion-title>
+            </ion-toolbar>
+          </ion-header>
+        <ion-list #dynamicList id="dynamicList">
+            <ion-item *ngFor="let item of listaAgrupCoroPanel;let i = index" > 
+                <ion-label (click)="mostrarAgrup(item.key,item.nombre,item.director,item.origen,item.tipo,item.horario)">
+                    <h3>{{item.nombre}}</h3>
+                    <h4>Director: {{item.director}}</h4>
+                  </ion-label>
+              
+            </ion-item>
+    
+          </ion-list>
+    </ion-slide>
+
+    <ion-slide>
+        <ion-header>
+            <ion-toolbar color="warning">
+              <ion-title>
+                <span style="font-weight:normal">Cuarteta</span>
+              </ion-title>
+            </ion-toolbar>
+          </ion-header>
+        <ion-list #dynamicList id="dynamicList">
+            <ion-item *ngFor="let item of listaAgrupCuarPanel;let i = index" > 
+                <ion-label (click)="mostrarAgrup(item.key,item.nombre,item.director,item.origen,item.tipo,item.horario)">
+                    <h3>{{item.nombre}}</h3>
+                    <h4>Director: {{item.director}}</h4>
+                  </ion-label>
+              
+            </ion-item>
+    
+          </ion-list>
+    </ion-slide>
+    
+  </ion-slides>
 
 </ion-content>
-

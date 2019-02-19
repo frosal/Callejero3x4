@@ -8,17 +8,24 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalComponent } from './modal/modal.component';
+
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import{ModalPage} from './modal/modal.page';
+
 
 
 @NgModule({
-  declarations: [AppComponent, ModalComponent],
-  entryComponents: [],
+  declarations: [AppComponent, ModalPage],
+  entryComponents: [ModalPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    AngularFireModule,
+    AngularFireDatabaseModule,
+    
     AngularFireModule.initializeApp(environment.firebaseConfig),
+  
     AngularFirestoreModule,],
   providers: [
     StatusBar,

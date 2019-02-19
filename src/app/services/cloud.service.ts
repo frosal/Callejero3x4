@@ -56,20 +56,20 @@ export class CloudService {
 
   }
   */
-leerAgrupss(tipo){
-return this.AgrupCollection.get();
-}
+  leerAgrupss():Promise<firebase.firestore.QuerySnapshot>{
+    return this.AgrupCollection.ref.get();
+  }
 
-  leerAgrupsComparsa() {
+  leerAgrupsComparsa():Promise<any> {
     return this.AgrupCollection.ref.where("tipo","==","Comparsa").get();
   }
-  leerAgrupsChirigota() {
+  leerAgrupsChirigota():Promise<any> {
     return this.AgrupCollection.ref.where("tipo","==","Chirigota").get();
   }
-  leerAgrupsCoro() {
+  leerAgrupsCoro():Promise<any> {
     return this.AgrupCollection.ref.where("tipo","==","Coro").get();
   }
-  leerAgrupsCuarteta() {
+  leerAgrupsCuarteta():Promise<any> {
     return this.AgrupCollection.ref.where("tipo","==","Cuarteta").get();
   }
   

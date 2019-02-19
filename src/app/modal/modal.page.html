@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{tipo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-header>
+          
+          <ion-card-title>Nombre</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+         {{nombre}}
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+          <ion-card-header>
+            
+            <ion-card-title>Director</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+           {{director}}
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+              
+              <ion-card-title>Origen</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+             {{origen}}
+            </ion-card-content>
+          </ion-card>
+      
+        <ion-card>
+            <ion-card-header>
+              
+              <ion-card-title>Horario</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+             {{horario}}
+            </ion-card-content>
+          </ion-card>
+  
+    
+    
+        </ion-content> 
+      
+<ion-button (click)="cerrar()">Cerrar</ion-button>
+
