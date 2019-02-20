@@ -14,10 +14,18 @@ export class Tab1Page {
   constructor(public navCtrl: NavController) {
  
   }
+  /**
+   * Metodo que se implementa al iniciar la ventana.
+   * Dentro llama al metodo loadmap().
+   */
  
   ionViewDidEnter() {
     this.loadmap();
   }
+
+  /**
+   * Metodo que carga un mapa con unas coordenadas predifinidas.
+   */
  
   loadmap() {
     

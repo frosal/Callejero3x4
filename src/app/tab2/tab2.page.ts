@@ -33,7 +33,14 @@ export class Tab2Page{
   listaAgrupCuarPanel=[];
  style: any;
   
-
+/**
+ * Metodo constructor.
+ * @param cloud 
+ * @param loadingController 
+ * @param router 
+ * @param modalCont 
+ * @param actionSheetController 
+ */
   constructor(private cloud: CloudService,
     public loadingController: LoadingController,
     private router: Router,
@@ -43,6 +50,11 @@ export class Tab2Page{
     public actionSheetController: ActionSheetController){
 
     }
+
+    /**
+     * Metodo que se implementa al iniciar la actividad.
+     * Carga los datos de las agrupaciones.
+     */
 
     ionViewDidEnter(){
       this.presentLoading('Cargando...');
@@ -104,11 +116,16 @@ export class Tab2Page{
 
     
 
-
+/**
+ * Metodo que soluciona un bug de duplicacion de registos en la lista al iniciar la ventana.
+ */
     async delete() { //para solucionar el tema de list-items-sliding con ngfor
       await this.dynamicList.closeSlidingItems();
     }
-
+/**
+ * Metodo que carga un loadign
+ * @param msg 
+ */
     async presentLoading(msg) {
       let myloading = await this.loadingController.create({
         message: msg
@@ -118,7 +135,17 @@ export class Tab2Page{
 
     
    
-    
+    /**
+     * Metodo que llama a un modalPage y muestra la informacion de la agrupacion
+     * seleccionada en la lista.
+     * @returns modal
+     * @param key 
+     * @param nombre 
+     * @param director 
+     * @param origen 
+     * @param tipo 
+     * @param horario 
+     */
 
     async mostrarAgrup(key,nombre, director, origen, tipo, horario){
       const modal=await this.modalCont.create({
@@ -139,7 +166,10 @@ horario:horario
 
       return await modal.present();
     }
-    
+    /**
+     * Metodo que actualiza la categoria en la que se encuentra el slide.
+     * @param cat 
+     */
 
     updateCat(cat: Promise<any>){
       cat.then(dat =>{

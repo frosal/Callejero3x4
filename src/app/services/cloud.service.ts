@@ -32,48 +32,48 @@ export class CloudService {
   }
 
   //cargar agrupaciones.
-  /*
-  getAgrups(tipo,reload?): Promise<iAgrup[]> {
-    if(reload){
-      this.lastlasAgrupLoaded=null;
-      this.scrollAgrupEnabled=true;
-    }
-
-    this.lastAgrupLoaded=this.lastlasAgrupLoaded;
-    return new Promise((resolve,reject) => {
-      let lreq: iAgrup[]=[];
-      let query;
-      if(this.lastAgrupLoaded==null){
-        query= this.AgrupCollection.ref.where("tipo","==",tipo).orderBy("nombre","asc").limit(10).get();
-      }else{
-        query= this.AgrupCollection.ref.where("tipo","==",tipo).orderBy("nombre","asc").startAfter(this.lastAgrupLoaded).limit(10).get();
-      }
-
-     
-      
-    });
-    
-
-  }
-  */
+  /**
+   * Metodo de consulta que devuelve todas las agrupaciones.
+   * no implentado.
+   * @returns AgrupCollection
+   */
   leerAgrupss():Promise<firebase.firestore.QuerySnapshot>{
     return this.AgrupCollection.ref.get();
   }
-
+/**
+ * Metodo de consulta a base de datos que devuelve todos los elementos cuyo tipo es comparsa
+ * @returns AgrupCollection
+ */
   leerAgrupsComparsa():Promise<any> {
     return this.AgrupCollection.ref.where("tipo","==","Comparsa").get();
   }
+  /**
+ * Metodo de consulta a base de datos que devuelve todos los elementos cuyo tipo es chirigota
+ * @returns AgrupCollection
+ */
   leerAgrupsChirigota():Promise<any> {
     return this.AgrupCollection.ref.where("tipo","==","Chirigota").get();
   }
+  /**
+ * Metodo de consulta a base de datos que devuelve todos los elementos cuyo tipo es coro
+ * @returns AgrupCollection
+ */
   leerAgrupsCoro():Promise<any> {
     return this.AgrupCollection.ref.where("tipo","==","Coro").get();
   }
+  /**
+ * Metodo de consulta a base de datos que devuelve todos los elementos cuyo tipo es cuarteta
+ * @returns AgrupCollection
+ */
   leerAgrupsCuarteta():Promise<any> {
     return this.AgrupCollection.ref.where("tipo","==","Cuarteta").get();
   }
   
-  
+  /**
+ * Metodo de consulta a base de datos que devuelve los datos de una agrupacion
+ * @returns AgrupCollection
+ * @param id
+ */
 
   oneAgrup(id) {
     return this.AgrupCollection.doc(id).get();
